@@ -7,6 +7,9 @@ This is a modular implementation of a deep learning system for predicting urban 
 ```
 perception_module/
 ├── config.py               # Configuration settings
+├── place-pulse
+|   ├── get_data.py         # Download the places pulse data from figshare
+|   └── trueskill_score.py  # Genrate score for each image
 ├── data/
 │   ├── __init__.py
 │   ├── dataset.py          # Dataset and preprocessing
@@ -22,7 +25,11 @@ perception_module/
 ├── utils/
 │   ├── __init__.py
 │   └── misc.py             # Miscellaneous utility functions
+├── trained_models/         # save trained models in this repo
+|   └── get_models.py       # Download pretrained models 
+├── pred.py                 # Pred perception and extract embeddings
 └── train.py                # Main training script
+
 ```
 
 ## Features
@@ -39,12 +46,34 @@ perception_module/
 
 ## Usage
 
+### Downloding Places Pulse data
+
+Use following command to download places pulse data from the figshare repository: 
+```bash
+python place-pulse/get_data.py
+```
+
+### trueskill ranking
+
+Use following command to convert the pairwise comparision data to trueskill based ranking/score data.
+```bash
+python places-pulse/trueskill_score.py
+```
+
 ### Basic Training
 
 Train a model with default settings for a specific perception type:
 
 ```bash
 python -m perception_module.train --perception beautiful --backbone vit_large_patch14_dinov2
+```
+
+### Prediction on new Images
+
+Use the trained model to predict the score and extract embeddings for new images
+
+```bash
+python -m perception_module.pred --perception --model_path --save_data
 ```
 
 ### Training with Different Backbones
