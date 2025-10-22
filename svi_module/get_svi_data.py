@@ -163,14 +163,14 @@ if __name__ == '__main__':
     ##
     gdf = gdf.to_crs(4326)
     ##
-    BOUNDING_BOX = gdf.total_bounds
-    #print(total_bbox)
+    lat1, lon1, lat2, lon2 = gdf.total_bounds
     #BOUNDING_BOX = [55.71, 55.98, -4.54, -4.22]
-    #BOUNDING_BOX = [55.71, 55.98, -4.22, -3.85]
+    BOUNDING_BOX = [lon1, lon2, lat1, lat2]
+    print(BOUNDING_BOX)
 
     # Initialize downloader with smaller batch size and rate limiting
     downloader = StreetViewDownloader(
-        output_dir='./output_data/'
+        output_dir='./svi_module/svi_data/',
         batch_size=10,  # Smaller batch size for better progress tracking
         rate_limit_delay=0.7  # 1 second delay between API requests
     )
