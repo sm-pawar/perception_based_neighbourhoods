@@ -1,4 +1,4 @@
-from utils.misc import (
+from .misc import (
     setup_logging,
     setup_device,
     set_seed,

@@ -8,7 +8,7 @@ from torch.utils.data import Dataset, DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from PIL import Image
 
-from data.utils import get_preprocessing_transforms, panorama_to_plane
+from .utils import get_preprocessing_transforms, panorama_to_plane
 
 class CustomImageDataset(Dataset):
     """
