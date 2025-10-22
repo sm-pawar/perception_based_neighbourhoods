@@ -161,7 +161,7 @@ if __name__ == '__main__':
     # Replace 'path/to/your/shapefile.shp' with your shapefile's path
     gdf = geopandas.read_file('./raw_data/os_built_extent/glasgow_open_built_areas.shp')
     ##
-    conver to epsg4326
+    gdf = gdf.to_crs(4326)
     ##
     BOUNDING_BOX = gdf.total_bounds
     #print(total_bbox)
