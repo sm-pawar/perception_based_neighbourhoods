@@ -3,4 +3,6 @@
 perception_module/__pycache__/
 perception_module/models/__pycache__/
 svi_module/svi_data/
-
+perception_module/pred_output/
+perception_module/data/__pycache__/
+perception_module/trained_models/
