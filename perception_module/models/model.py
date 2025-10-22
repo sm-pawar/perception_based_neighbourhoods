@@ -6,7 +6,7 @@ import torch
 import torch.nn as nn
 import logging
 
-from models.backbones import get_backbone
+from .backbones import get_backbone
 
 class PerceptionModel(nn.Module):
     """

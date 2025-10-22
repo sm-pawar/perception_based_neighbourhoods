@@ -1,2 +1,6 @@
 *.gpkg
 *.csv
+perception_module/__pycache__/
+perception_module/models/__pycache__/
+svi_module/svi_data/
+
