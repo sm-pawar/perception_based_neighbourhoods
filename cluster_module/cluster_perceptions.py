@@ -15,16 +15,16 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import MinMaxScaler
 
 # ConstrainedAgglomerativeClustering module contains modified version of agglomerative clustring algorithum. Make sure 'agg_clustring_final.py' is accessible.
-from agg_clustring_final import ConstrainedAgglomerativeClustering
+from cluster_module.agg_clustring_final import ConstrainedAgglomerativeClustering
 
 
 # Input files
-NC_FILES_PATTERN = '../perception_module/output_data/*.nc'
-GSV_METADATA_PATH = '../svi_module/svi_info.csv'
-ET_CELLS_PATH = '../raw_data/ET_Cells_Glasgow/et_cells_glasgow_epsg27700.gpkg'
+NC_FILES_PATTERN = './perception_module/pred_output/*.nc'
+GSV_METADATA_PATH = './svi_module/svi_data/svi_info.csv'
+ET_CELLS_PATH = './raw_data/ET_Cells_Glasgow/et_cells_glasgow_epsg27700.gpkg'
 
 # Output files
-OUTPUT_GPKG_PATH = './output_data/et_cells_glasgow_epsg27700_score_custer_all.gpkg'
+OUTPUT_GPKG_PATH = './cluster_module/output_data/et_cells_glasgow_epsg27700_score_custer_all.gpkg'
 
 # --- Functions ---
 def process_embeddings(nc_file_path: str, variance_threshold: int = 10) -> pd.DataFrame:
