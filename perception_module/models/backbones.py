@@ -19,7 +19,7 @@ def get_backbone(backbone_name, pretrained=True):
     Returns:
         tuple: (backbone_model, feature_dim)
     """
-    from config import BACKBONES
+    from perception_module.config import BACKBONES
     
     if backbone_name not in BACKBONES:
         raise ValueError(f"Unknown backbone: {backbone_name}. Available backbones: {list(BACKBONES.keys())}")
