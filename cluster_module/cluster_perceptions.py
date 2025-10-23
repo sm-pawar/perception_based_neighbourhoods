@@ -155,6 +155,7 @@ if __name__ == "__main__":
                     n_jobs=-1
                 )
                 labels = clustering.fit_predict(emb_distances)
+                labels_list = list(labels)
                 et_cells_clean_data[f'{perception}_ID'] = clustering.labels_
                 print(f"Clustering complete for '{perception}'. Found {len(np.unique(labels))} clusters.")
             except Exception as e:
