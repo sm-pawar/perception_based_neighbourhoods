@@ -27,6 +27,7 @@ perception_module/
 │   └── misc.py             # Miscellaneous utility functions
 ├── trained_models/         # save trained models in this repo
 |   └── get_models.py       # Download pretrained models 
+├── pred_output/            # save trained models in this repo
 ├── pred.py                 # Pred perception and extract embeddings
 └── train.py                # Main training script
 

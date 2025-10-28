@@ -159,7 +159,7 @@ if __name__ == '__main__':
     # Define bounding box [lat_min, lat_max, lon_min, lon_max]
     
     # Replace 'path/to/your/shapefile.shp' with your shapefile's path
-    gdf = geopandas.read_file('./raw_data/os_built_extent/glasgow_open_built_areas.shp')
+    gdf = geopandas.read_file('./raw_data/glasgow_open_built/glasgow_open_built_areas.shp')
     ##
     gdf = gdf.to_crs(4326)
     ##

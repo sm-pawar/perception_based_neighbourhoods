@@ -7,12 +7,10 @@ This repository contains supporting files and scripts used in this research for 
 ```
 Perception_based_neighbourhoods/
 ├── raw_data/
-│   ├── ET_cells_glasgow.shp
-│   ├── glasgow_bounds.shp
-│   ├── glasgow_open_built.shp
-│   └── glasgow_svi_grid.shp
+│   ├── ET_cells_glasgow/
+│   └── glasgow_open_built/
 ├── svi_module/
-│   ├── output_data/
+│   ├── svi_data/
 │   │   ├── svi_info.csv               # Demo data for next step
 │   │   └── images/                    # Downloaded street view images
 │   ├── get_svi_data.py                # Download Places Pulse data from Figshare
@@ -46,7 +44,7 @@ Perception_based_neighbourhoods/
 The first module downloads street view images based on the Glasgow grid.
 
 **Input:**
-- `/raw_data/os_built_extent/glasgow_open_built_areas.shp` - Grid defining sampling locations for street view images
+- `/raw_data/glasgow_open_built/glasgow_open_built_areas.shp` - Grid defining sampling locations for street view images
 
 **Script:**
 ```bash
@@ -54,10 +52,9 @@ python svi_module/get_svi_data.py
 ```
 
 **Output:**
-- `svi_module/output_data/svi_info.csv` - Metadata for downloaded images (image IDs, coordinates, etc.)
-- `svi_module/output_data/images/` - Downloaded street view images
+- `svi_module/svi_data/svi_info.csv` - Metadata for downloaded images (image IDs, coordinates, etc.)
+- `svi_module/svi_data/images/` - Downloaded street view images
 
-**Note:** Demo data is already provided in `svi_module/output_data/` to enable testing subsequent steps without running the full download.
 
 ---
 
@@ -66,8 +63,8 @@ python svi_module/get_svi_data.py
 This module uses pre-trained models to predict perceptual qualities (e.g., safety, beauty, liveliness) for each street view image.
 
 **Input:**
-- `svi_module/output_data/svi_info.csv` - Image metadata from Step 1
-- `perception_module/pre_trained_models/` - Pre-trained perception prediction models
+- `svi_module/svi_data/svi_info.csv` - Image metadata from Step 1
+- `perception_module/trained_models/` - Pre-trained perception prediction models
 
 **Script:**
 ```bash
@@ -106,21 +103,13 @@ python cluster_module/cluster_perceptions.py
 
 ---
 
-## Quick Start with Demo Data
+## Quick test of Clustering module
 
-If you want to test individual modules without running the full pipeline, demo data is provided in each module's `output_data/` folder:
-
-1. **Test perception prediction only:**
-   ```bash
-   python perception_module/pred.py
-   ```
-   Uses demo `svi_info.csv` from `svi_module/output_data/`
-
-2. **Test clustering only:**
+**Test clustering only:**
    ```bash
    python cluster_module/cluster_perceptions.py
    ```
-   Uses demo `glasgow_perception.nc` from `perception_module/output_data/`
+   Uses demo `20250626_*_embedding_efficientnet.nc` from `/perception_module/pred_output/`
 
 ## Citation
 
