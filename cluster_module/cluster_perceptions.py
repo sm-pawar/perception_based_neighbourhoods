@@ -15,7 +15,7 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import MinMaxScaler
 
 # ConstrainedAgglomerativeClustering module contains modified version of agglomerative clustring algorithum. Make sure 'agg_clustring_final.py' is accessible.
-from cluster_module.agg_clustring_final import ConstrainedAgglomerativeClustering
+from agg_clustring_final import ConstrainedAgglomerativeClustering
 
 
 # Input files
@@ -24,7 +24,7 @@ GSV_METADATA_PATH = './svi_module/svi_data/svi_info.csv'
 ET_CELLS_PATH = './raw_data/ET_Cells_Glasgow/et_cells_glasgow_epsg27700.gpkg'
 
 # Output files
-OUTPUT_GPKG_PATH = './cluster_module/output_data/et_cells_glasgow_epsg27700_score_custer_all.gpkg'
+OUTPUT_GPKG_PATH = '/home/users/smpawar/data/git/perception_based_neighbourhoods/cluster_module/output_data/et_cells_glasgow_epsg27700_score_custer_all.gpkg'
 
 # --- Functions ---
 def process_embeddings(nc_file_path: str, variance_threshold: int = 10) -> pd.DataFrame:
@@ -47,7 +47,7 @@ def process_embeddings(nc_file_path: str, variance_threshold: int = 10) -> pd.Da
     arr_pca = pca.fit_transform(da_embs.embeddings)
     print(f"Explained variance ratio: {sum(pca.explained_variance_ratio_):.4f}")
 
-    perception_name_raw = str(da_embs.perception_type.item()) # .item() to get scalar value from xarray DataArray
+    perception_name_raw = str(da_embs.perception_type) # .item() to get scalar value from xarray DataArray
     perception_name_cleaned = perception_name_raw.split('_')[-1] if '_' in perception_name_raw else perception_name_raw
 
     score = da_embs[f'{perception_name_raw}_score'].values
@@ -157,13 +157,14 @@ if __name__ == "__main__":
                 labels = clustering.fit_predict(emb_distances)
                 labels_list = list(labels)
                 et_cells_clean_data[f'{perception}_ID'] = clustering.labels_
-                print(f"Clustering complete for '{perception}'. Found {len(np.unique(labels))} clusters.")
+                print(f"Clustering complete for '{perception}'. Found {len(np.unique(clustering.labels_))} clusters.")
             except Exception as e:
                 print(f"An error occurred during clustering for '{perception}': {e}. Skipping.")
 
     # 7. Calculate Mean Scores per Cluster
     print("\n--- Calculating Mean Scores per Cluster ---")
-    score_perceptions = set([col.split('_')[-2] for col in et_cells_clean_data.columns if col.startswith('score_')])
+    score_perceptions = set([col.split('_')[-1] for col in et_cells_clean_data.columns if col.startswith('score_')])
+    print(score_perceptions)
 
     for per in score_perceptions:
         cluster_id_col = f'{per}_ID'
