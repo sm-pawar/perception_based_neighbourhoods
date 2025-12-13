@@ -4,9 +4,10 @@ import os
 from datetime import datetime
 
 # Path configurations
-IMAGE_DIR = '/home/users/smpawar/data/place-pulse/final_photo_dataset'
-CLEAN_CSV_DIR = '/home/users/smpawar/data/place-pulse/trueskill_perception_score_EuropeEurope_img_check.csv' #trueskill_perception_score_EuropeEurope_img_check # trueskill_perception_score_updated
-BASE_SAVE_PATH = '/work/scratch-pw2/smpawar/py_output/'
+# These paths can be overridden via environment variables or command-line arguments
+IMAGE_DIR = os.getenv('PP_IMAGE_DIR', './place-pulse/final_photo_dataset')
+CLEAN_CSV_DIR = os.getenv('PP_CSV_DIR', './place-pulse/trueskill_perception_score_EuropeEurope_img_check.csv')
+BASE_SAVE_PATH = os.getenv('PP_SAVE_PATH', './perception_module/output/')
 
 # Training parameters
 BATCH_SIZE = 16
